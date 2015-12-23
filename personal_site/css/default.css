@@ -1,0 +1,100 @@
+@import url(https://fonts.googleapis.com/css?family=Crimson+Text:600italic,600,400italic,400);
+body {
+    color: black;
+    font-family: 'Crimson Text';
+    font-size: 22px;
+    line-height: 1.4;
+    margin: 0px auto 0px auto;
+    width: 800px;
+}
+
+aside {
+    display: block;
+    float: left;
+    position: absolute;
+    margin-left: 0;
+    left: 7rem;
+    width: 12rem;
+    text-align: right;
+    list-style-type: none;
+    clear: both;
+    margin-bottom: 1rem;
+}
+
+blockquote {
+    display: block;
+    font-size: 85%;
+}
+
+a:link { 
+    color: #265C83; 
+    text-decoration: none;
+}
+a:visited { 
+    color: #3A2683; 
+    text-decoration: none;
+}
+a:hover   { color: #7FDBFF; }
+a:active  { color: #007BE6; } 
+.link { text-decoration: none; }
+
+code {
+    font-size: 75%;
+}
+
+pre.sourceCode {
+    padding-left: 15px;
+}
+
+div#header {
+    border-bottom: 1px solid black;
+    margin-bottom: 30px;
+    padding: 12px 0px 12px 0px;
+}
+
+div#logo a {
+    position: relative;
+    top: 4px;
+    color: #B32626;
+    float: left;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+div#header #navigation {
+    text-align: right;
+}
+
+div#header #navigation a {
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 12px;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+}
+
+div#footer {
+    border-top: solid 1px black;
+    color: #555;
+    font-size: 12px;
+    margin-top: 30px;
+    padding: 12px 0px 12px 0px;
+    text-align: right;
+}
+
+h1 {
+    font-size: 120%;
+}
+
+h2 {
+    font-size: 110%;
+}
+
+div.info {
+    color: #555;
+    font-size: 14px;
+    font-style: italic;
+}
