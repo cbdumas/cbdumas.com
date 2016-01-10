@@ -79,7 +79,7 @@ So if we want to define the Foldable instance for ListC, we need only define fol
 instance Folable ListC where
     foldr f z (ListC l) = l z f
 
--- and many other instances are easy to do given 'foldr':
+-- and a few other instances are easy to do given 'foldr':
 instance Functor ListC where
     fmap f = foldr (cons . f) nil
 
@@ -87,15 +87,46 @@ instance Show a => Show (ListC a)
     show = foldr (\head tail -> show head ++ "," ++ tail) "End"
 ```
 
+In order to concatenate two lists we want to replace the end of one list with an entire new one. The
+foldr function allows this to be expressed very concisely:
+
+```haskell
+(<++>) :: ListC a -> ListC a -> ListC a
+xs <++> ys = foldr cons ys xs
+```
+
+Defining Nat
+============
+
 Having seen how ListC works to encode a recursive type, we can define our first primitive type
 (rather than a type constructor like ListC or MaybeC), NatC. As usual, we'll look at the (recursive)
 ADT and the Church encoding side by side:
 
 ```haskell
-data Nat = Z | S Nat
+data Nat = Zero | Succ Nat
 
 newtype NatC = NatC {unNat :: forall r. r -> (r -> r) -> r}
 ```
 
-This looks exactly like the ListC type signature, but missing the type that goes insdie the list. In
-fact, NatC is isomorphic to ListC (). 
+This looks exactly like the ListC type signature, but missing the type that goes inside the list.
+Looking at the constructors for NatC:
+
+```haskell
+zero :: NatC
+zero = NatC $ \x f -> x
+
+succ :: NatC -> NatC -> NatC
+succ n = NatC $ \x f -> f (n x f) 
+```
+
+And we can definte operations like fromInt, addition, multiplication from these constructors. However we can take
+a slight shortcut and use the observation above that ListC and NatC are almost identical to reuse
+some of our ListC machinery for NatC. This shortcut will utilize the following, alternative
+definition to NatC:
+
+```haskell
+newtype NatC = NatC (ListC ())
+```
+
+Which is saying that our NatC type can be represented as a list of units. The length of the list
+corresponds to the value of the number. Sum can the be given by list concatenation, 
